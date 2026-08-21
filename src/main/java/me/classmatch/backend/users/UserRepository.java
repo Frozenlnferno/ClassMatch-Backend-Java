@@ -8,7 +8,7 @@ import java.util.UUID;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
-import me.classmatch.backend.users.dto.GetUserResponse;
+import me.classmatch.backend.users.dto.UserResponse;
 
 @Repository
 public class UserRepository {
@@ -19,7 +19,7 @@ public class UserRepository {
         this.jdbcClient = jdbcClient;
     }
 
-    public Optional<GetUserResponse> findById(UUID userId) {
+    public Optional<UserResponse> findById(UUID userId) {
         return jdbcClient.sql("""
                 SELECT id, email, name, created_at, bio, avatar_url
                 FROM public.users
@@ -30,9 +30,9 @@ public class UserRepository {
                 .optional();
     }
 
-    private GetUserResponse mapUser(ResultSet resultSet, int rowNumber)
+    private UserResponse mapUser(ResultSet resultSet, int rowNumber)
             throws SQLException {
-        return new GetUserResponse(
+        return new UserResponse(
                 resultSet.getObject("id", UUID.class),
                 resultSet.getString("email"),
                 resultSet.getString("name"),

@@ -2,11 +2,9 @@ package me.classmatch.backend.users;
 
 import java.util.UUID;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
-import me.classmatch.backend.users.dto.GetUserResponse;
+import me.classmatch.backend.users.dto.UserResponse;
 
 @Service
 public class UserService {
@@ -17,11 +15,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public GetUserResponse getCurrentUser(UUID userId) {
+    public UserResponse getCurrentUser(UUID userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "User profile not found"
-                ));
+                .orElseThrow(() -> new UserNotFoundException(userId));
     }
 }

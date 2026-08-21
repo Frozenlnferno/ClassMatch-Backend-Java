@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record GetUserResponse(
+public record UserResponse(
         UUID id,
         String email,
         String name,
