@@ -20,6 +20,8 @@ spring:
         jwt:
           issuer-uri: ${SUPABASE_JWT_ISSUER}
           jwk-set-uri: ${SUPABASE_JWKS_URL}
+          jws-algorithms:
+            - ES256
           audiences:
             - ${SUPABASE_JWT_AUDIENCE:authenticated}
 
